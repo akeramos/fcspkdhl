@@ -9,10 +9,9 @@
       font-family: Arial, sans-serif;
       max-width: 700px;
       margin: 20px auto;
-      padding: 15px;
       background: #f9f9f9;
       border-radius: 8px;
-      border: 1px solid #ccc;
+      border: 1px solid black;
     }
 
     h1{
@@ -23,7 +22,7 @@
       text-align: left;
       margin: 10px 0;
     }
-
+    
     label {
       font-weight: bold;
       margin: 2px 0 2px;
@@ -104,7 +103,8 @@
       padding: 4px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      background-color: #f1f1f1;
+      background-color: #e6f4ea;
+      margin-bottom: 5px;
     }
 
     ul.compact-list {
@@ -162,9 +162,17 @@
       flex-direction: column;
       margin-bottom: 8px;
     }
+    
+    .form-container {
+      border-radius: 8px;
+      background-color: #f2f8fc;
+      padding: 20px;
+}
   </style>
 </head>
 <body>
+<div class="form-container">  
+  
   <h1>Fever Clerking Sheet</h1>
   <div style="background-color: #eaf4fc ; color: red; font-weight: bold; padding: 10px; margin-bottom: 5px; border: 1px solid red; border-radius: 6px; text-align: center;"> 
   For cases with history of fever at presentation
@@ -347,6 +355,8 @@ day of illness, phase, warning signs, shock status
   <div style="display: flex; justify-content: center; margin-top: 5px;">
       <button type="button" onclick="clearForm()">Clear All</button>
   </div>
+  
+</div>  
   
  <script>
   function calculateDaysFever() {
