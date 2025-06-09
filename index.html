@@ -404,7 +404,7 @@ day of illness, phase, warning signs, shock status
   function getCheckboxGroupValue(name) {
     const boxes = [...document.querySelectorAll(`input[name='${name}']`)];
     const checked = boxes.filter(cb => cb.checked).map(cb => cb.value);
-    return checked.length ? checked.join(", ") : "No";
+    return checked.length ? checked.join(", ") : "-";
   }
 
   function getInputByName(name) {
@@ -457,7 +457,7 @@ Warning Symptoms:`;
         const detail = getInputByName(sym.name);
         summary += `\n - ${sym.val}${detail ? `: ${detail}` : ": Yes"}`;
       } else {
-        summary += `\n - ${sym.val}: No`;
+        summary += `\n ${sym.val}: No`;
       }
     });
 
@@ -476,15 +476,15 @@ const other_physical = getInputByName("other_physical");
 
     summary += `
 Examination:
-- General Appearance: ${appearance}
-- GCS: ${gcs}
-- CRT: ${crt}
-- Pulse Volume: ${pulse_volume}
-- CVS: ${cvs}
-- Lung: ${lung}
-- Abdomen: ${abdomen}
-- Plasma Leakage: ${plasma_leakage}
-- Other Physical Findings: ${other_physical}
+ General Appearance: ${appearance}
+ GCS: ${gcs}
+ CRT: ${crt}
+ Pulse Volume: ${pulse_volume}
+ CVS: ${cvs}
+ Lung: ${lung}
+ Abdomen: ${abdomen}
+ Plasma Leakage: ${plasma_leakage}
+ Other Physical Findings: ${other_physical}
 `;  
     summary += `
 
