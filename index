@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fever CS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    h1{
+      text-align: center;
+      color: #003366; /* Navy Blue */
+    }
+    h2, h3 {
+      text-align: left;
+      margin: 10px 0;
+    }
+
+    label {
+      font-weight: bold;
+      margin: 2px 0 2px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 4px;
+      margin-bottom: 2px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .form-group {
+      margin-bottom: 2px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 4px;
+      margin-bottom: 2px;
+    }
+
+    .checkbox-group label {
+      font-weight: normal;
+      display: flex;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .extra-input {
+      margin-left: 20px;
+      margin-bottom: 4px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      font-size: 14px;
+      border-radius: 4px;
+      background-color: #0074d9;
+      color: white;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .warning {
+      background-color: #ffe0e0;
+      border: 1px solid red;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2px 4px;
+      padding: 4px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #f1f1f1;
+    }
+
+    ul.compact-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 4px;
+    }
+
+    ul.compact-list li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2px;
+    }
+
+    ul.compact-list input[type="checkbox"] {
+      margin-right: 6px;
+    }
+
+    .list-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: 6px;
+    }
+
+    .list-group label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: normal;
+    }
+
+    .listed-checks {
+      margin: 4px 0;
+    }
+
+    .listed-checks label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    .vertical-list-group label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      margin-bottom: 4px;
+      gap: 8px;
+    }
+
+    .vertical-list-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fever Clerking Sheet</h1>
+  <div style="background-color: #eaf4fc ; color: red; font-weight: bold; padding: 10px; margin-bottom: 5px; border: 1px solid red; border-radius: 6px; text-align: center;"> 
+  For cases with history of fever at presentation
+</div>
+  
+  <form id="fcs-form">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="phone">Latest Phone Number:</label>
+    <input type="tel" id="phone" name="phone" required />
+
+    <label for="lmp">LMP (Female):</label>
+    <input type="date" id="lmp" name="lmp" />
+
+    <label for="visit">No of Visit:</label>
+    <select id="visit" name="visit" required>
+      <option value="">-- Select Visit --</option>
+      <option value="1st">1st Visit</option>
+      <option value="2nd">2nd Visit</option>
+      <option value="3rd">3rd Visit</option>
+      <option value="4th">4th Visit</option>
+    </select>
+
+   <h3>Comorbid</h3>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="comorbid" value="History of previous dengue"> History of previous dengue</label>
+      <label><input type="checkbox" name="comorbid" value="Obesity > 27kg/m2"> Obesity BMI>27</label>
+      <label><input type="checkbox" name="comorbid" value="Smoking"> Smoking</label>
+      <label><input type="checkbox" name="comorbid" value="Pregnancy"> Pregnancy</label>
+      <label><input type="checkbox" name="comorbid" value="Other comorbids"> Others</label>
+    </div>
+
+    <h3>Risk Group</h3>
+    <div class="grid-container">
+      <label><input type="checkbox" name="risk_group" value="Travelers / visitors of endemic area"> Travelers</label>
+      <label><input type="checkbox" name="risk_group" value="Immigrant"> Immigrant</label>
+      <label><input type="checkbox" name="risk_group" value="Orang asli"> Orang asli</label>
+      <label><input type="checkbox" name="risk_group" value="Army or forced to spend time in jungle"> Army</label>
+      <label><input type="checkbox" name="risk_group" value="Loggers"> Loggers</label>
+      <label><input type="checkbox" name="risk_group" value="Rubber tappers"> Rubber tappers</label>
+      <label><input type="checkbox" name="risk_group" value="Farmers"> Farmers</label>
+      <label><input type="checkbox" name="risk_group" value="River activity / work in endemic area eg. construction"> River activity</label>
+      <label><input type="checkbox" name="risk_group" value="Plantation"> Plantation</label>
+      <label><input type="checkbox" name="risk_group" value="Camping / jungle trekking / hiking"> Camping/ hiking</label>
+      <label><input type="checkbox" name="risk_group" value="Others"> Others</label>
+    </div>
+    <label>Any recent history of fever at home or work place:</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="fever_history" value="Yes" onclick="onlyOne(this)"> Yes</label>
+      <label><input type="checkbox" name="fever_history" value="No" onclick="onlyOne(this)"> No</label>
+    </div>
+
+    <label>Are you from dengue prone area / any recent fogging:</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="dengue_area" value="Yes" onclick="onlyOne(this)"> Yes</label>
+      <label><input type="checkbox" name="dengue_area" value="No" onclick="onlyOne(this)"> No</label>
+    </div>
+
+    <h3>Visit Assessment</h3>
+
+    <label for="complain">Chief Complaint:</label>
+    <textarea id="complain" name="complain" rows="2"></textarea>
+
+    <label for="feverOnset">Date of Fever Onset:</label>
+    <input type="date" id="feverOnset" name="feverOnset" onchange="calculateDaysFever()" />
+
+    <label for="daysFever">Days of fever:</label>
+    <input type="number" id="daysFever" name="daysFever" min="0" readonly />
+
+    <label>Concurrent symptoms:</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="symptoms" value="Aches and Pain"> Aches and Pain</label>
+      <label><input type="checkbox" name="symptoms" value="Rash"> Rash</label>
+    </div>
+
+    <label>How much can you drink?</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="drink" value="Normal" onclick="onlyOne(this)"> Normal</label>
+      <label><input type="checkbox" name="drink" value="Less" onclick="onlyOne(this)"> Less</label>
+      <label><input type="checkbox" name="drink" value="Nil" onclick="onlyOne(this)"> Nil</label>
+    </div>
+
+    <label>Is there reduced urine volume?</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="urine" value="Yes" onclick="onlyOne(this)"> Yes</label>
+      <label><input type="checkbox" name="urine" value="No" onclick="onlyOne(this)"> No</label>
+    </div>
+
+    <label>Can you perform daily activities?</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="daily" value="Yes" onclick="onlyOne(this)"> Yes</label>
+      <label><input type="checkbox" name="daily" value="No" onclick="onlyOne(this)"> No</label>
+    </div>
+
+    <label>Warning Symptoms:</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="warnings" value="Lethargy" onchange="toggleExtra(this, 'lethargyDetail')"> Lethargy</label>
+      <div class="extra-input hidden" id="lethargyDetail"><input type="text" name="lethargyDetail" placeholder="If yes, explain"></div>
+
+      <label><input type="checkbox" name="warnings" value="Vomiting" onchange="toggleExtra(this, 'vomitingDetail')"> Vomiting</label>
+      <div class="extra-input hidden" id="vomitingDetail"><input type="text" name="vomitingDetail" placeholder="Frequency"></div>
+
+      <label><input type="checkbox" name="warnings" value="Diarrhea" onchange="toggleExtra(this, 'diarrheaDetail')"> Diarrhea</label>
+      <div class="extra-input hidden" id="diarrheaDetail"><input type="text" name="diarrheaDetail" placeholder="Frequency"></div>
+
+      <label><input type="checkbox" name="warnings" value="Abdominal Pain" onchange="toggleExtra(this, 'abdominalDetail')"> Abdominal Pain</label>
+      <div class="extra-input hidden" id="abdominalDetail"><input type="text" name="abdominalDetail" placeholder="Duration & pain score"></div>
+
+      <label><input type="checkbox" name="warnings" value="Bleeding / Bruising" onchange="toggleExtra(this, 'bleedingDetail')"> Bleeding / Bruising</label>
+      <div class="extra-input hidden" id="bleedingDetail"><input type="text" name="bleedingDetail" placeholder="Site & duration"></div>
+    </div>
+
+  <h3>Examination</h3>
+  <label>General Appearance:</label>
+  <div class="checkbox-group">
+    <label><input type="checkbox" name="appearance" value="Pink"> Pink</label>
+    <label><input type="checkbox" name="appearance" value="Pale"> Pale</label>
+    <label><input type="checkbox" name="appearance" value="Jaundice"> Jaundice</label>
+  </div>
+
+    <div style="background-color: #eaf4fc ; color: red; padding: 10px; margin-top: 0px; border: 1px solid red; border-radius: 6px; text-align: left;"> 
+   ⚠️ Insert vital sign and anthropometry information from your data
+</div>
+    
+  <label>Physical Examination</label>
+  <input type="text" name="gcs" placeholder="GCS">
+  <input type="text" name="crt" placeholder="CRT (abnormal > 2s)">
+  <input type="text" name="pulse_volume" placeholder="Pulse Volume: normal / weak">
+  <input type="text" name="cvs" placeholder="CVS">
+  <input type="text" name="lung" placeholder="Lung">
+  <input type="text" name="abdomen" placeholder="Abdomen">
+  <input type="text" name="plasma_leakage" placeholder="Any evidence of plasma leakage">
+  <input type="text" name="other_physical" placeholder="Other findings e.g. throat / lymph nodes">
+ 
+    <div style="background-color: #eaf4fc ; color: red; padding: 10px; margin-top: 0px; border: 1px solid red; border-radius: 6px; text-align: left;"> 
+   ⚠️ Dont forget to include and interprate your investigation result accordingly
+</div>
+    
+  <h3>Management</h3>
+
+<div class="form-group">
+  <label for="diagnosis">1. DIAGNOSIS:</label>
+  <textarea id="diagnosis" name="diagnosis" rows="3" placeholder="If dengue fever please state:
+day of illness, phase, warning signs, shock status
+(compensated/decompensated), with (comorbidity)
+"></textarea>
+</div>
+
+<div class="form-group">
+  <label for="notificationDate">2. Notification (Date):</label>
+  <input type="date" id="notificationDate" name="notificationDate" />
+</div>
+
+<div class="form-group">
+  <label for="alertCardGiven">3. Dengue Alert card given:</label>
+  <select id="alertCardGiven" name="alertCardGiven">
+    <option value="">-- Select --</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+</div>
+
+  <div class="form-group">
+  <label for="otherDiagnosis">4. Have you ruled out other differential diagnosis? <br>(Malaria/ Covid/ ILI/ Leptospirosis/ Measles etc)</label>
+  <textarea id="otherDiagnosis" name="otherDiagnosis" rows="2" placeholder="Please specify"></textarea>
+  </div>
+  </form>
+  
+  <div style="background-color: #eaf4fc ; color: red; font-weight: bold; padding: 10px; margin-top: 0px; border: 1px solid red; border-radius: 6px; text-align: left;"> 
+   ⚠️Remember to add your management plan
+</div>
+  
+  <div style="display: flex; justify-content: center; margin-top: 5px; margin-bottom: 5px;">
+    <button type="button" onclick="generateSummary()">Show Summary
+    </button>
+  </div>
+    <textarea id="summary" rows="14" readonly placeholder="Summary will appear here.."></textarea>
+  
+  <div style="display: flex; justify-content: center; margin-top: 5px;">
+      <button type="button" onclick="clearForm()">Clear All</button>
+  </div>
+  
+ <script>
+  function calculateDaysFever() {
+    const onsetDate = document.getElementById("feverOnset").value;
+    const daysField = document.getElementById("daysFever");
+    if (onsetDate) {
+      const today = new Date();
+      const onset = new Date(onsetDate);
+      today.setHours(0, 0, 0, 0);
+      onset.setHours(0, 0, 0, 0);
+
+      if (onset > today) {
+        alert("Date of fever onset cannot be in the future.");
+        document.getElementById("feverOnset").value = "";
+        daysField.value = "";
+        daysField.classList.remove("warning");
+        return;
+      }
+
+      const diffTime = today - onset;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      daysField.value = diffDays;
+      daysField.classList.toggle("warning", diffDays > 5);
+    }
+  }
+
+  function onlyOne(checkbox) {
+    const checkboxes = document.querySelectorAll(`input[name='${checkbox.name}']`);
+    checkboxes.forEach(cb => {
+      if (cb !== checkbox) cb.checked = false;
+    });
+  }
+
+  function toggleExtra(checkbox, targetId) {
+    const target = document.getElementById(targetId);
+    if (checkbox.checked) {
+      target.classList.remove("hidden");
+    } else {
+      target.classList.add("hidden");
+      const input = target.querySelector("input");
+      if (input) input.value = "";
+    }
+  }
+
+  function getCheckboxGroupValue(name) {
+    const boxes = [...document.querySelectorAll(`input[name='${name}']`)];
+    const checked = boxes.filter(cb => cb.checked).map(cb => cb.value);
+    return checked.length ? checked.join(", ") : "No";
+  }
+
+  function getInputByName(name) {
+    const input = document.querySelector(`input[name='${name}']`);
+    return input ? input.value : "";
+  }
+    
+    document.querySelectorAll("input[name='appearance']").forEach(cb => {
+  cb.addEventListener('click', function() {
+    if (this.checked) {
+      document.querySelectorAll("input[name='appearance']").forEach(other => {
+        if (other !== this) other.checked = false;
+      });
+    }
+  });
+});
+
+  function generateSummary() {
+    const getVal = id => document.getElementById(id)?.value || "";
+
+    let summary = `Name: ${getVal("name")}
+Phone: ${getVal("phone")}
+LMP: ${getVal("lmp")}
+Visit: ${getVal("visit")}
+
+Comorbid: ${getCheckboxGroupValue("comorbid")}
+Risk Group: ${getCheckboxGroupValue("risk_group")}
+History of Fever at Home/Work: ${getCheckboxGroupValue("fever_history")}
+From Dengue-Prone Area / Fogging: ${getCheckboxGroupValue("dengue_area")}
+
+Chief Complaint: ${getVal("complain")}
+Date of Fever Onset: ${getVal("feverOnset")}
+Days of Fever: ${getVal("daysFever")}
+Concurrent Symptoms: ${getCheckboxGroupValue("symptoms")}
+Drink Amount: ${getCheckboxGroupValue("drink")}
+Reduced Urine Volume: ${getCheckboxGroupValue("urine")}
+Daily Activities: ${getCheckboxGroupValue("daily")}
+
+Warning Symptoms:`;
+
+    [
+      { val: "Lethargy", name: "lethargyDetail" },
+      { val: "Vomiting", name: "vomitingDetail" },
+      { val: "Diarrhea", name: "diarrheaDetail" },
+      { val: "Abdominal Pain", name: "abdominalDetail" },
+      { val: "Bleeding / Bruising", name: "bleedingDetail" }
+    ].forEach(sym => {
+      const cb = document.querySelector(`input[name='warnings'][value='${sym.val}']`);
+      if (cb && cb.checked) {
+        const detail = getInputByName(sym.name);
+        summary += `\n - ${sym.val}${detail ? `: ${detail}` : ": Yes"}`;
+      } else {
+        summary += `\n - ${sym.val}: No`;
+      }
+    });
+
+    summary += `\n`;
+
+// Add examination info
+const appearance = getCheckboxGroupValue("appearance") || "None";
+const gcs = getInputByName("gcs");
+const crt = getInputByName("crt");
+const pulse_volume = getInputByName("pulse_volume");
+const cvs = getInputByName("cvs");
+const lung = getInputByName("lung");
+const abdomen = getInputByName("abdomen");
+const plasma_leakage = getInputByName("plasma_leakage");
+const other_physical = getInputByName("other_physical");
+
+    summary += `
+Examination:
+- General Appearance: ${appearance}
+- GCS: ${gcs}
+- CRT: ${crt}
+- Pulse Volume: ${pulse_volume}
+- CVS: ${cvs}
+- Lung: ${lung}
+- Abdomen: ${abdomen}
+- Plasma Leakage: ${plasma_leakage}
+- Other Physical Findings: ${other_physical}
+`;  
+    summary += `
+
+Diagnosis:
+${getVal("diagnosis")}
+
+Notification Date: ${getVal("notificationDate")}
+Dengue Alert Card Given: ${getVal("alertCardGiven")}
+Other Differential Diagnosis Ruled Out: ${getVal("otherDiagnosis")}
+`;
+
+   document.getElementById("summary").value = summary.trim();
+  }
+    
+    function clearForm() {
+  const form = document.getElementById("fcs-form");
+  form.reset();
+
+  // Also hide all extra input fields (like warning details)
+  document.querySelectorAll('.extra-input').forEach(el => {
+    el.classList.add("hidden");
+    const input = el.querySelector("input");
+    if (input) input.value = "";
+  });
+
+  // Clear days of fever field and warning color
+  const daysField = document.getElementById("daysFever");
+  if (daysField) {
+    daysField.value = "";
+    daysField.classList.remove("warning");
+  }
+
+  // Clear summary textarea
+  const summary = document.getElementById("summary");
+  if (summary) summary.value = "";
+}
+
+</script>
+
+
+</body>
+</html>
